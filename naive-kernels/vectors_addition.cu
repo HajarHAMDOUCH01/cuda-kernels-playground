@@ -20,7 +20,7 @@ int main(){
     const int N = 50000000;
     const int size = N * sizeof(float);
 
-    // Allocate host memory 
+    // Allocate host memory
     float *h_c = new float[N];
 
     // Allocate device memory
@@ -28,7 +28,7 @@ int main(){
     cudaMalloc(&d_a, size);
     cudaMalloc(&d_b, size);
     cudaMalloc(&d_c, size);
-    
+
     int threadsPerBlock = 256;
     int blocksPerGrid = (N + threadsPerBlock - 1) / threadsPerBlock;
 
@@ -42,24 +42,24 @@ int main(){
     cudaEventRecord(start1);
     initVectors<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, N);
     cudaEventRecord(stop1);
-    
+
     // Time addVectors kernel
     cudaEventRecord(start2);
     addVectors<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, N);
     cudaEventRecord(stop2);
-    
+
     // Time memory copy
     cudaEventRecord(start3);
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
     cudaEventRecord(stop3);
-    
+
     cudaEventSynchronize(stop3);
-    
+
     float ms1, ms2, ms3;
     cudaEventElapsedTime(&ms1, start1, stop1);
     cudaEventElapsedTime(&ms2, start2, stop2);
     cudaEventElapsedTime(&ms3, start3, stop3);
-    
+
     printf("\n=== Timing Results ===\n");
     printf("initVectors kernel:  %f ms\n", ms1);
     printf("addVectors kernel:   %f ms\n", ms2);
@@ -81,9 +81,10 @@ int main(){
             break;
         }
     }
-    if (success):
-        print("true")
-    print("false")
+    if (success)
+        std::cout << "true!" << std::endl;
+    else
+        std::cout << "false" << std::endl;
 
     // Cleanup
     cudaEventDestroy(start1); cudaEventDestroy(stop1);
