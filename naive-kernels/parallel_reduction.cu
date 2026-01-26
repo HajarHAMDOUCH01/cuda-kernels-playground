@@ -48,11 +48,9 @@ int main(){
 
         cudaDeviceSynchronize();
 
-        // Free old input if it's not the original array
         if (d_in != d_vector)
             cudaFree(d_in);
 
-        // Prepare for next iteration
         d_in = d_out;
         n = blocksPerGrid;
     }
