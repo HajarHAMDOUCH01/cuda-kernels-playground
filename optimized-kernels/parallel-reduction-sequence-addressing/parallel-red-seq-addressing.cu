@@ -53,7 +53,7 @@ int main(){
     float initTime = 0;
     cudaEventElapsedTime(&initTime, start, stop);
     
-    int *d_in = d_vector; // Fixed: initialize d_in
+    int *d_in = d_vector;
     int *d_out;
 
     // Time reduction
