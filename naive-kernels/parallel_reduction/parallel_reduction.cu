@@ -112,7 +112,6 @@ int main(){
     std::cout << "Expected:  " << (N * (N - 1) / 2) << std::endl;
     std::cout << "========================================" << std::endl;
 
-    // Cleanup
     cudaFree(d_vector);
     cudaFree(d_in);
     cudaEventDestroy(start);
