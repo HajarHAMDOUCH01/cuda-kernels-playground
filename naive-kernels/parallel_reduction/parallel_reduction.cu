@@ -14,7 +14,7 @@ __global__ void reduce(int *g_in_data, int *g_out_data, int n) {
     unsigned int tid = threadIdx.x;// this is the thread's idx in the block it is in
     unsigned int i = blockIdx.x * blockDim.x + tid;// this is for tracking elements of the data within the block the thread is in
 
-    // Load or pad with 0
+    // load or pad with 0
     sdata[tid] = (i < n) ? g_in_data[i] : 0;// each thread copies elements of its block -IN PARALLEL : in threads and in blocks-
     __syncthreads();
 

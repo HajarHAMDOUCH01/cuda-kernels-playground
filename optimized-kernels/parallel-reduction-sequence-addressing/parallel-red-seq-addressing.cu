@@ -65,8 +65,7 @@ int main(){
 
         cudaMalloc(&d_out, blocksPerGrid * sizeof(int));
 
-        reduce_seq_addressing<<<blocksPerGrid, threadsPerBlock,
-                threadsPerBlock * sizeof(int)>>>(d_in, d_out, n);
+        reduce_seq_addressing<<<blocksPerGrid, threadsPerBlock, threadsPerBlock * sizeof(int)>>>(d_in, d_out, n);
 
         cudaDeviceSynchronize();
 
